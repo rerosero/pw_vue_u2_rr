@@ -1,21 +1,22 @@
 <template>
   <div> 
-    <ContadorView />
+    <!-- Renderiza el componente DirectivasView -->
+    <DirectivasView />
   </div>
 </template>
 
 <script>
-// Importamos componentes
+// Importamos el componente desde el mismo directorio
+import DirectivasView from './DirectivasView.vue';
 
-import ContadorView from './ContadorView.vue'
 export default {
-  // Aquí deben estar TODOS los componentes registrados
+  // Registramos el componente para que pueda usarse en el template
   components: {
-    ContadorView
+    DirectivasView
   }
 };
 </script>
 
 <style>
-
+/* Estilos opcionales del componente */
 </style>
