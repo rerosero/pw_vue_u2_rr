@@ -5,10 +5,20 @@
 <template>
   <div>
       <!-- Primera instancia del componente Contador -->
-      <Contador />
-      <!-- Segunda instancia del mismo componente -->
-      <!-- Son independientes: cada uno maneja su propio estado -->
-      <Contador />
+       <!-- Enviamos:
+        - tit2: Título del contador
+        - inicio: valor inicial (mayor a 10 por la validación del prop)
+        - mostrar: muestra un botón condicional dentro del contador
+    -->
+      <Contador tit2="Contador 1"
+       v-bind:inicio="20" 
+       :mostrar="true"/>
+       <!-- Segunda instancia del mismo componente -->
+       <!-- Este contador tendrá su propio estado independiente -->
+      <Contador
+       tit2="Contador 2"  
+       :inicio="4" 
+       :mostrar="false"/>
 </div>
 </template>
 
