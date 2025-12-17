@@ -21,6 +21,12 @@
         <!-- Muestra el primer elemento del arreglo (si existe) -->
         <h1>{{ arreglo[0] }}</h1>
 
+        <hr/>
+        <label for="id_nombre_1">Nombre</label>
+        <input  v-model="nombre" id="id_nombre_1" type="text">
+        <label for="id_apellido_1">Apellido</label>
+        <input v-model="apellido" @keypress.enter="agregarEStudiante1" id="id_apellido_1" type="text">
+
         <!-- Lista de estudiantes -->
         <ul>
             <!--
@@ -29,7 +35,7 @@
                 PROBABLEMENTE lo quieres eliminar, porque oculta la lista innecesariamente.
             -->
             <li 
-                v-for="{ nombre, apellido } in arreglo" 
+               v-show="nombre" v-for="{ nombre, apellido } in arreglo" 
                 :key="nombre"
             >
                 {{ nombre }} - {{ apellido }}
@@ -89,6 +95,18 @@ export default {
             this.arreglo.push(estu); // Se agrega al arreglo
 
             this.limpiarFormulario(); // Limpia el formulario después
+        },
+        agregarEStudiante1(event){
+            console.log('event')
+            if(event.charCode !==13){
+                return
+            }
+            console.log('presiono el Enten');
+            console.log("Agrego estudiante 1");
+            console.log(event);
+            console.log(event.charCode);
+            console.log(event.keyCode);
+            this.agregarEstudiante();
         },
 
         // Limpia los campos para permitir ingresar otro estudiante

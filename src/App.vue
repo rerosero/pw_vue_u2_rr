@@ -7,7 +7,7 @@
 
 <script>
 // Importamos el componente desde el mismo directorio
-import DirectivasView from './DirectivasView.vue';
+import DirectivasView from '@/views/DirectivasView.vue';
 
 export default {
   // Registramos el componente para que pueda usarse en el template

@@ -24,7 +24,7 @@
 
 <script>
 // Importamos el componente Contador desde la carpeta components
-import Contador from './components/Contador.vue';
+import Contador from '../components/Contador.vue';
 export default {
     // Registramos el componente para poder usarlo dentro del <template>
     components: {
