@@ -1,9 +1,10 @@
 <template>
   <div>
       <!-- Aquí irá el contenido del componente PreguntaView -->
-       <img src="https://yesno.wtf/assets/yes/5-64c2804cc48057b94fd0b3eaf323d92c.gif" alt="No se puede mostrar la imagen ">    
-        <div class="pregunta-container">
-            <input type="text" placeholder="Hazme una pregunta">
+       <img v-if="imagen" :src="imagen" alt="No se puede mostrar la imagen ">    
+        <div class="oscuro"> </div>
+       <div class="pregunta-container">
+            <input v-model="pregunta" type="text" placeholder="Hazme una pregunta">
             <p>Recuerda terminar con el signo de interogación (?)</p>
             <h2>Sere millonario?</h2>
             <h1>Yes, No</h1>
@@ -12,13 +13,41 @@
 </template>
 
 <script>
+    import { consumirAPIFacade,consumirAPIFacad2 } from '@/clients/YesNoClient';
 export default {
+       data() {
+        return {
+            pregunta: null,
+            respuesta:null,
+            imagen:null,
 
+        }
+    },
+    watch: {
+        pregunta(value, oldValue) {
+
+            if (value.includes('?')) {
+                this.respuesta='Pensando...';
+                this.consumir();
+            }
+
+        },
+    },
+    methods: {
+        async consumir() {
+            const resp = await consumirAPIFacade();
+            this.imagen = resp.image;
+            console.log('Respuesta final');
+            console.log(resp);
+            console.log(resp.answer);
+            this.respuesta=resp.answer;
+        }
+    }
 }
 </script>
 
 <style>
-    img{
+    img, .oscuro{
         height: 100vh;
         width: 100vw;
         max-height: 100%;
@@ -26,6 +55,9 @@ export default {
         position:fixed;
         left: 0px;
         top: 0px ;
+    }
+    .oscuro{
+        background-color: rgba(0, 0, 0, 0.4);
     }
     .pregunta-container{
         position: relative;
