@@ -1,20 +1,18 @@
 <template>
   <div> 
-    <!-- Renderiza el componente DirectivasView -->
-    <PreguntaView />
+    <!-- Renderiza el componente  -->
+    <PokemonView />
   </div>
 </template>
 
 <script>
 // Importamos el componente desde el mismo directorio
-import DirectivasView from '@/views/DirectivasView.vue';
-import PreguntaView from './views/PreguntaView.vue';
+import PokemonView from './views/PokemonView.vue';
 
 export default {
   // Registramos el componente para que pueda usarse en el template
   components: {
-    DirectivasView,
-    PreguntaView
+    PokemonView
   }
 };
 </script>
