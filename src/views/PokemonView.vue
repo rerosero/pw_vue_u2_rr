@@ -1,12 +1,15 @@
 <template>
     <div>
-        <PokemonImage :pokemonId="1" />
+        <PokemonImage v-if="mostrar" :pokemonId="pokemonGanador" />
         <PokemonOpciones @seleccionado="evaluarGanador($event)" :listaPokemons="pokemonArr" />
+        <div class="button">
+            <button @click="destruir()">Destruir</button>
+        </div>
     </div>
     <div class="mensaje">
         <h1 v-if="mensaje">{{ mensaje }}</h1>
     </div>
-        
+
 </template>
 
 <script>
@@ -23,12 +26,31 @@ export default {
         return {
             pokemonArr: [],
             pokemonGanador: null,
-            mensaje: null
+            mensaje: false,
+            mostrar: true
         }
+    },
+    beforeCreate() {
+        console.log("componente PokemonView antes de crearse:Apenas inicia la instancia del componente");
+    },
+    created() {
+        console.log("componente PokemonView creado:ya se resolvieron data, computed, methods, watch");
+    },
+    /* Monta el componente cuando se renderiza o visualiza el componente */
+    beforeMount() {
+        console.log("Justo ante del primer render de un elemento html");
     },
     mounted() {
         console.log("componente PokemonView montado");
+        console.log("componente PokemonView montado -> el componente ya se visualiza en el html");
         this.iniciarJuego();
+    },
+    /* Actualiza el componente cuando hay cambios en data o props */
+    beforeUpdate() {
+        console.log("beforeUpdate: cuando cambio un data o un props del componente y vue esta por renderizar el cambio -> antes de que el DOM se actualice");
+    },
+    updated() {
+        console.log("updated: cuando ya se actualizo tras la re-renderizacion -> el DOM se actualizó");
     },
     methods: {
         async iniciarJuego() {
@@ -36,6 +58,9 @@ export default {
 
             const idAleatorio = obtenerAleatorioFacade(0, 3);
             this.pokemonGanador = this.pokemonArr[idAleatorio].id;
+        },
+        destruir() {
+            this.mostrar = !this.mostrar;
         },
         evaluarGanador(idGanador) {
             console.log('valor recibido desde padre')
@@ -53,8 +78,14 @@ export default {
 </script>
 
 <style>
-    .mensaje{
-        background-color:  lightgray;
-        text-align: center;
-    }
+.mensaje {
+    background-color: lightgray;
+    text-align: center;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 </style>
